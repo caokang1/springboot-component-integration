@@ -1,0 +1,43 @@
+#数据源配置
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      driverClassName: oracle.jdbc.OracleDriver
+      jndiName: jdbc/ccms
+      password: CCMS_SIT
+      url: jdbc:oracle:thin:@10.142.141.16:1521:orasit02
+      username: CCMS_SIT_D
+      validation-query: select 1 from dual
+      test-on-borrow: false
+      max-active: 30
+      connectionTimeout: 60000
+      max-wait: 60000
+      max-open-prepared-statements: 100
+
+dynamic:
+  datasource:
+    #主数据源
+    slave1:
+      driverClassName: oracle.jdbc.OracleDriver
+      jndiName: jdbc/ccms
+      password: CCMS_SIT
+      url: jdbc:oracle:thin:@10.142.141.16:1521:orasit02
+      username: CCMS_SIT_D
+      validation-query: select 1 from dual
+      test-on-borrow: false
+      max-pool-prepared-statement-per-connection-size: 100
+      max-active: 30
+      connectionTimeout: 60000
+      max-wait: 60000
+    #副数据源
+    slave2:
+      driverClassName: com.microsoft.sqlserver.jdbc.SQLServerDriver
+      jndiName: jdbc/cplus
+      maxActive: 100
+      maxIdle: 30
+      maxWait: 60000
+      password: CITAS_ETE
+      url: jdbc:sqlserver://10.142.141.34:1433;databaseName=CITAS_PLUS_CN
+      username: CITAS_ETE
+      max-pool-prepared-statement-per-connection-size: 100
